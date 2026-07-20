@@ -1,0 +1,16 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# ロゴ変換の元画像(scripts/logo_from_image.py の入力。開発時のみダウンロード、コミット不要)
+out/logo_src/
+
+# 開発中のレビュー・修正report(内部記録のため非公開)
+out/_reports/
