@@ -96,7 +96,7 @@ def test_truncate_for_grid_no_truncation_when_it_fits() -> None:
 
 
 def test_truncate_for_grid_truncates_and_reserves_last_slot_for_summary() -> None:
-    # 32コア/2列/高さ14相当(Sol実測のoverflowシナリオ): capacity=28、末尾1マスを省略サマリ用に予約
+    # 32コア/2列/高さ14相当(overflowシナリオ): capacity=28、末尾1マスを省略サマリ用に予約
     items = list(range(32))
     visible, omitted = truncate_for_grid(items, columns=2, available_height=14)
     assert len(visible) == 27  # capacity(28) - 1

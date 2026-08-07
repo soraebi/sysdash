@@ -153,7 +153,7 @@ async def test_multi_column_rows_recompute_on_panel_resize() -> None:
 @pytest.mark.asyncio
 async def test_multi_column_rows_truncates_with_summary_when_too_many_for_height() -> None:
     """幅・高さともに小さいパネルに大量のコア(32個)を渡すと、パネル外へあふれず
-    末尾が"+N cores"の省略サマリになることを確認する(Sol実測: 32コア/2x2でoverflow)。
+    末尾が"+N cores"の省略サマリになることを確認する。
     """
     app = _PanelOnlyApp()
     async with app.run_test(size=(60, 12)) as pilot:

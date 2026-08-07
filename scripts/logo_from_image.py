@@ -35,18 +35,15 @@ Wikimedia CommonsのSpecial:FilePathは同一URLでも将来的にコンテン�
 差異が出た場合はこのSHA256を基準に元ファイルの再取得可否を判断すること。
 
 - **Windows**: https://commons.wikimedia.org/wiki/File:Windows_11_logo.svg (幅1000で取得。
-  平面・軸平行な4スクエア。旧4色フラッグ版(Windows_logo_-_2012_derivative.svg)はパース歪みが
-  ありレビュー指摘で差し替え済み)
+  平面・軸平行な4スクエア版)
   sha256:30f62d5929e48e2b6f1297c4e96251b1efa979b2e6bafb6919aae8953c7adc97 (crop後: windows11_icon_hires.png)
   crop座標: `(0, 0, 237, 236)`(ワードマーク"Windows 11"部分を除去)
   変換: `--width 30 --height 30 --name WINDOWS_LOGO --crop 0,0,237,236`
 - **Ubuntu**(circle of friends): https://commons.wikimedia.org/wiki/File:UbuntuCoF.svg (幅200)
   sha256:669721740033908b72a134469a4c97e5b6d0ad964578f197389b2d8189778235・クロップ無し
 - **Debian**(渦巻き): https://commons.wikimedia.org/wiki/File:Debian-OpenLogo.svg (幅1000で取得。
-  線が細く縮小で途切れるため`--dilate`で膨張させてから変換。標準版(30セル)は初回`--dilate 25`
-  で変換したがSolレビューで「渦の付け根が細い」との指摘があり`--dilate 45`に強化して再変換した
-  (35でも改善は見られたが、付け根の連続性は45の方がより安定していたため採用)。40セル版(_LG)は
-  出力解像度に余裕があるため`--dilate 25`のままで問題なし)
+  線が細く縮小で途切れるため`--dilate`で膨張させてから変換。標準版(30セル)は`--dilate 45`、
+  40セル版(_LG)は出力解像度に余裕があるため`--dilate 25`を使用)
   sha256:a82ee311f3779ea5848eb51fa1c410a3b9a2c23d55d9235c7972b758187e9545 (debian_hires.png)
   crop座標: `(0, 0, 1280, 1265)`(下部の"debian"ワードマークを除去)
   変換(標準・30セル): `--width 30 --height 30 --name DEBIAN_LOGO --dilate 45 --crop 0,0,1280,1265`
@@ -70,10 +67,7 @@ Wikimedia CommonsのSpecial:FilePathは同一URLでも将来的にコンテン�
 - **CentOS**: https://commons.wikimedia.org/wiki/File:CentOS_Graphical_Symbol.svg (幅200)
   sha256:f6bd8ebdf0bbabdaebf670c188653d80ad2bc3b9359e7670ca6f8c0fb3d7d1ca・クロップ無し
 - **AlmaLinux**: https://commons.wikimedia.org/wiki/File:AlmaLinux_Icon_Logo.svg (公式の6色アイコン、幅200)。
-  当初は30セルでの判別性を懸念しSimple Icons単色版(`cdn.jsdelivr.net/npm/simple-icons`、ブランド
-  カラー`#9F2936`付与、`resvg-py`でラスタライズ)に差し替えていたが、40セル版(ワイドサイドバー用)で
-  6色版の方が花弁の境界を視認しやすいとの司令塔+Solの最終視認レビュー結果を受け、標準版(30セル)・
-  ワイド版(40セル)とも本来の公式6色アイコンに統一した(Simple Icons単色版は不採用)
+  標準版(30セル)・ワイド版(40セル)とも公式6色アイコンを使用(6色の方が花弁の境界を視認しやすい)
   sha256:dcb3a883c1ec6a275f7a44c55b42360dc30685e5aa1de6f704b2180931b585d8 (almalinux.png)
   クロップ無し
   変換(標準・30セル): `--width 30 --height 30 --name ALMALINUX_LOGO`
@@ -141,8 +135,7 @@ def load_and_fit(
     crop指定時は(x0, y0, x1, y1)でワードマーク等を除いたアイコン部分のみを事前に切り出す
     (Debian/Alpine/Raspberry Pi OS等、公式配布画像にワードマークが同梱されている場合に使う)。
     dilate>0の場合、縮小前(クロップ後の元解像度)にMaxFilterで線を膨張させる(dilateは奇数の
-    ウィンドウ幅)。渦巻き等の細い線が30x30への縮小で途切れて見えるのを防ぐ(Debianロゴの
-    レビュー指摘対応)。
+    ウィンドウ幅)。渦巻き等の細い線が30x30への縮小で途切れて見えるのを防ぐ。
     """
     src = Image.open(path).convert("RGBA")
     if crop is not None:

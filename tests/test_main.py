@@ -107,7 +107,7 @@ def test_main_with_lang_en_shows_english_help_text(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     """--lang enを--help付きで指定すると、argparseの--help文言自体も英語になることを確認する
-    (P9-fix item2: --lang先読み→set_language→本パーサー構築、の順に変更したことの検証)。
+    (--lang先読み→set_language→本パーサー構築、の順で処理している)。
     """
     monkeypatch.setattr(sys, "argv", ["sysdash", "--lang", "en", "--help"])
 

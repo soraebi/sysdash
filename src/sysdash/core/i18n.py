@@ -155,9 +155,8 @@ MESSAGES: dict[str, dict[str, str]] = {
     # 両言語とも英語ラベルのまま固定しておりMESSAGESには登録しない。
 }
 
-# --smoke出力は元々英語のみで、対応する日本語版は存在しなかった。CI等の自動処理での
-# 言語非依存性を優先し、--langによらず常に英語固定とする(MESSAGES/t()は経由しない。
-# 詳細はout/_reports/p9-fix-report.mdの判断メモを参照)。
+# --smoke出力はCI等の自動処理での言語非依存性を優先し、--langによらず常に英語固定とする
+# (MESSAGES/t()は経由しない)。
 
 
 def t(key: str, **kwargs: object) -> str:

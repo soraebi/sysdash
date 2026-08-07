@@ -609,8 +609,7 @@ async def test_sidebar_visible_only_in_grid_mode() -> None:
 async def test_sidebar_hidden_between_grid_min_and_sidebar_min_width() -> None:
     """GRID_MIN_WIDTH(100)以上でも、SIDEBAR_MIN_WIDTH(120)未満ではサイドバーを隠す。
 
-    100〜119幅は「2x2グリッドだがサイドバー無し」、120以上でサイドバーも表示される
-    (レビュー指摘: 閾値をGRID表示可否とサイドバー表示可否とで分離)。
+    100〜119幅は「2x2グリッドだがサイドバー無し」、120以上でサイドバーも表示される。
     """
     assert SIDEBAR_MIN_WIDTH == 120
     app = _make_app()

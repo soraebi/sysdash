@@ -83,8 +83,7 @@ def run_smoke_check(system: str | None = None, collectors: list[Collector] | Non
     異常とみなし、理由をstderrへ出力してexit code 1相当の値を返す。
 
     出力は--langによらず常に英語固定(i18n非対応)。自動処理(CI等)での消費を想定した
-    診断チャンネルであり、ロケールに依存しない一貫した出力を優先している。元々日本語版は
-    存在しなかった(詳細はout/_reports/p9-fix-report.mdの判断メモ参照)。
+    診断チャンネルであり、ロケールに依存しない一貫した出力を優先している。
     """
     if collectors is None:
         collectors = build_collectors(system)
